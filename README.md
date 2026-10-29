@@ -28,6 +28,7 @@ src/
   game/board.test.ts  ロジックのテスト
   App.tsx             画面
   index.css           見た目（ダークモード対応）
+scripts/generate-icons.mjs  アイコン・スプラッシュ画面・favicon の生成
 android/              Capacitor が生成した Android プロジェクト
 capacitor.config.ts   アプリ ID・アプリ名
 ```
@@ -57,6 +58,24 @@ Android Studio で実機かエミュレータを選んで実行します。Web �
 
 - アプリ ID：`io.github.makomakoz.reversi`
 - アプリ名：リバーシ
+
+## アイコンとスプラッシュ画面
+
+緑の盤に初期配置の石 4 つを並べたデザインです。デザインの正本は `scripts/generate-icons.mjs` の中の SVG で、次のコマンドで全部作り直します。
+
+```bash
+npm run icons
+```
+
+作られるもの：
+
+- Android のランチャーアイコン（`android/app/src/main/res/mipmap-*/`）
+  - `ic_launcher.png`・`ic_launcher_round.png`：アダプティブアイコンに対応しない端末向け
+  - `ic_launcher_foreground.png`・`ic_launcher_background.png`：アダプティブアイコンの前景（石）と背景（盤）
+- スプラッシュ画面（`android/app/src/main/res/drawable*/splash.png`）
+- ブラウザのタブ用アイコン（`public/favicon.svg`）
+
+作り直したら `npm run android:sync` で Android 側に反映します。
 
 ## 進捗と課題
 
