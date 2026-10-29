@@ -56,6 +56,21 @@ npm run android:open   # Android Studio で開く
 
 Android Studio で実機かエミュレータを選んで実行します。Web 側を直したら、毎回 `npm run android:sync` をやり直します。
 
+Android Studio を開かずにコマンドでデバッグ用 APK を作ることもできます（PowerShell）。
+
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Android\Android Studio\jbr"
+cd android
+.\gradlew.bat assembleDebug
+# できたもの: android\app\build\outputs\apk\debug\app-debug.apk
+```
+
+`android\local.properties`（git 管理外）に SDK の場所（`sdk.dir=C:/Users/<ユーザー名>/AppData/Local/Android/Sdk`）が必要です。Android Studio で一度開けば自動で作られます。
+
+### Gradle のバージョンについて
+
+Capacitor が生成した Gradle 8.14.3 は、Android Studio 同梱の Java 25 では動かないため、Gradle 9.5.1 に上げています（`android/gradle/wrapper/gradle-wrapper.properties`）。Gradle 9.6 以降は Android Gradle Plugin 8 系が使えなくなるので、9.6 以上に上げるときは Android Gradle Plugin も 9 系に上げる必要があります。
+
 - アプリ ID：`io.github.makomakoz.reversi`
 - アプリ名：リバーシ
 
